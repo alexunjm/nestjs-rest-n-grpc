@@ -4,15 +4,12 @@ import { Observable, Subject } from 'rxjs';
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
 import { HeroResponse } from 'src/grpc/proto/hero/interfaces/hero.response';
 import { HeroByIdRequest } from 'src/grpc/proto/hero/interfaces/hero-by-id.request';
+import { FindHeroByIdCommand } from 'src/hero/application/find-hero-by-id.use-case';
 
 // @Injectable()
 @Controller('hero')
 export class HeroGrpc {
-  private readonly items: HeroResponse[] = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Doe' },
-    { id: 3, name: 'Alex' },
-  ];
+  constructor(private readonly findHeroByIdCommand: FindHeroByIdCommand) {}
 
   @GrpcMethod('Hero')
   findOne(
@@ -21,7 +18,7 @@ export class HeroGrpc {
     call: ServerUnaryCall<any, any>,
   ): HeroResponse {
     Logger.log({ metadata, call });
-    return this.items.find(({ id }) => id === data.id);
+    return this.findHeroByIdCommand.exec(data.id);
   }
 
   @GrpcStreamMethod('Hero')
@@ -29,7 +26,7 @@ export class HeroGrpc {
     const hero$ = new Subject<HeroResponse>();
 
     const onNext = (HeroByIdRequest: HeroByIdRequest) => {
-      const item = this.items.find(({ id }) => id === HeroByIdRequest.id);
+      const item = this.findHeroByIdCommand.exec(HeroByIdRequest.id);
       hero$.next(item);
     };
     const onComplete = () => hero$.complete();
