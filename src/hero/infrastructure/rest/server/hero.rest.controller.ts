@@ -2,9 +2,9 @@ import { Controller, Get, Inject, OnModuleInit, Param } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable, ReplaySubject } from 'rxjs';
 import { toArray } from 'rxjs/operators';
-import { HeroByIdRequest } from 'src/grpc/proto/hero/interfaces/hero-by-id.request';
-import { Hero } from 'src/grpc/proto/hero/interfaces/hero.interface';
-import { HeroResponse } from 'src/grpc/proto/hero/interfaces/hero.response';
+import { HeroByIdRequest } from 'src/hero/infrastructure/grpc/proto/interfaces/hero-by-id.request';
+import { Hero } from 'src/hero/infrastructure/grpc/proto/interfaces/hero.interface';
+import { HeroResponse } from 'src/hero/infrastructure/grpc/proto/interfaces/hero.response';
 
 @Controller('rest/hero')
 export class HeroRest implements OnModuleInit {

@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { HelloReply } from 'src/grpc/proto/helloworld/interfaces/hello.reply';
+import { HelloReply } from 'src/hello-world/infrastructure/grpc/proto/interfaces/hello.reply';
 import { SayHelloCommand } from 'src/hello-world/domain/port/command/say-hello.command';
 
 @Controller('rest/hello')
