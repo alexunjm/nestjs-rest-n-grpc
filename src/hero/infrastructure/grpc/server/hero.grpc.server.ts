@@ -8,7 +8,7 @@ import { FindHeroByIdCommand } from 'src/hero/application/find-hero-by-id.use-ca
 
 // @Injectable()
 @Controller('hero')
-export class HeroGrpc {
+export class HeroGrpcServer {
   constructor(private readonly findHeroByIdCommand: FindHeroByIdCommand) {}
 
   @GrpcMethod('Hero')
