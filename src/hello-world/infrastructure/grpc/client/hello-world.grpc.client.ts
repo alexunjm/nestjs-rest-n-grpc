@@ -7,7 +7,7 @@ import { HelloRequest } from 'src/grpc/proto/helloworld/interfaces/hello.request
 import { HelloWorldExternal } from 'src/hello-world/application/hello-world.external';
 
 @Injectable()
-export class HelloWorldGrpc implements OnModuleInit, HelloWorldExternal {
+export class HelloWorldGrpcClient implements OnModuleInit, HelloWorldExternal {
   private greeterService: Greeter;
 
   constructor(@Inject('HELLO_PACKAGE') private readonly client: ClientGrpc) {}

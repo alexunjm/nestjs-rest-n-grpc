@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { grpcClientExternalOptions } from 'src/grpc/client/grpc-client.external.options';
-import { helloWorldAppProviders } from 'src/hello-world/application/hello-world.app.provider';
-import { HelloWorldRest } from 'src/hello-world/hello-world.rest.controller';
-import { helloWorldInfraProviders } from 'src/hello-world/provider/hello-world.infra.provider';
+import { sayHelloUseCase } from 'src/hello-world/application/say-hello.use-case.provider';
+import { helloWorldGrpcClient } from 'src/hello-world/infrastructure/grpc/client/hello-world.grpc.client.provider';
+import { HelloWorldRest } from 'src/hello-world/infrastructure/rest/server/hello-world.rest.controller';
 
 @Module({
   imports: [
@@ -15,9 +15,6 @@ import { helloWorldInfraProviders } from 'src/hello-world/provider/hello-world.i
     ]),
   ],
   controllers: [HelloWorldRest],
-  providers: [
-    ...helloWorldInfraProviders.SayHello,
-    helloWorldAppProviders.SayHello,
-  ],
+  providers: [...helloWorldGrpcClient.providers, ...sayHelloUseCase.providers],
 })
 export class HelloWorldModule {}
