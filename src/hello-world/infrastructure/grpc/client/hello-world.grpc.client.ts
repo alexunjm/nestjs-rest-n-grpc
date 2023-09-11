@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 import { Greeter } from 'src/grpc/proto/helloworld/interfaces/greeter.interface';
 import { HelloReply } from 'src/grpc/proto/helloworld/interfaces/hello.reply';
 import { HelloRequest } from 'src/grpc/proto/helloworld/interfaces/hello.request';
-import { HelloWorldExternal } from 'src/hello-world/application/hello-world.external';
+import { HelloWorldDao } from 'src/hello-world/domain/port/dao/hello-world.dao';
 
 @Injectable()
-export class HelloWorldGrpcClient implements OnModuleInit, HelloWorldExternal {
+export class HelloWorldGrpcClient implements OnModuleInit, HelloWorldDao {
   private greeterService: Greeter;
 
   constructor(@Inject('HELLO_PACKAGE') private readonly client: ClientGrpc) {}

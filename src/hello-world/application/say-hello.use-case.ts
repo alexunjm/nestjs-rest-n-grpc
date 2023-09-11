@@ -1,15 +1,11 @@
 import { Observable } from 'rxjs';
-import { HelloWorldExternal } from 'src/hello-world/application/hello-world.external';
-
-type GreetingParam = { name: string };
-type Hello = { message: string };
-
-export abstract class SayHelloCommand {
-  abstract exec(param: GreetingParam): Observable<Hello>;
-}
+import { GreetingParam } from 'src/hello-world/domain/model/greeting.param';
+import { Hello } from 'src/hello-world/domain/model/hello';
+import { SayHelloCommand } from 'src/hello-world/domain/port/command/say-hello.command';
+import { HelloWorldDao } from 'src/hello-world/domain/port/dao/hello-world.dao';
 
 export class SayHelloUseCase implements SayHelloCommand {
-  constructor(private readonly externalGreeting: HelloWorldExternal) {}
+  constructor(private readonly externalGreeting: HelloWorldDao) {}
 
   exec(param: GreetingParam): Observable<Hello> {
     return this.externalGreeting.sayHello(param);

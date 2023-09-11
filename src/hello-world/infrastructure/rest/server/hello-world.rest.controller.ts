@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { HelloReply } from 'src/grpc/proto/helloworld/interfaces/hello.reply';
-import { SayHelloCommand } from 'src/hello-world/application/say-hello.use-case';
+import { SayHelloCommand } from 'src/hello-world/domain/port/command/say-hello.command';
 
 @Controller('rest/hello')
 export class HelloWorldRest {
