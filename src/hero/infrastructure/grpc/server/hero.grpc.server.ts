@@ -4,9 +4,8 @@ import { Observable, Subject } from 'rxjs';
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
 import { HeroResponse } from 'src/grpc/proto/hero/interfaces/hero.response';
 import { HeroByIdRequest } from 'src/grpc/proto/hero/interfaces/hero-by-id.request';
-import { FindHeroByIdCommand } from 'src/hero/application/find-hero-by-id.use-case';
+import { FindHeroByIdCommand } from 'src/hero/domain/port/command/find-hero-by-id.command';
 
-// @Injectable()
 @Controller('hero')
 export class HeroGrpcServer {
   constructor(private readonly findHeroByIdCommand: FindHeroByIdCommand) {}
@@ -17,7 +16,7 @@ export class HeroGrpcServer {
     metadata: Metadata,
     call: ServerUnaryCall<any, any>,
   ): HeroResponse {
-    Logger.log({ metadata, call });
+    Logger.log({ metadata, request: call.request });
     return this.findHeroByIdCommand.exec(data.id);
   }
 

@@ -1,8 +1,5 @@
-type Hero = { id: number; name: string };
-
-export abstract class FindHeroByIdCommand {
-  abstract exec(id: number): Hero;
-}
+import { Hero } from 'src/hero/domain/model/hero';
+import { FindHeroByIdCommand } from 'src/hero/domain/port/command/find-hero-by-id.command';
 
 export class FindHeroByIdUseCase implements FindHeroByIdCommand {
   private readonly heroes: Hero[] = [
