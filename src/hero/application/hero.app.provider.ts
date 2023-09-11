@@ -3,6 +3,6 @@ import {
   FindHeroByIdUseCase,
 } from 'src/hero/application/find-hero-by-id.use-case';
 
-export const heroProviders = {
+export const heroAppProviders = {
   FindHeroById: { provide: FindHeroByIdCommand, useClass: FindHeroByIdUseCase },
 };
